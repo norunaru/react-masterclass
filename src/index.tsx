@@ -1,22 +1,22 @@
 import React from "react";
-import ReactDOM from "react-dom/client";
-import App from "./App";
+import ReactDOM from "react-dom";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { RecoilRoot } from "recoil";
 import { ThemeProvider } from "styled-components";
+import App from "./App";
 
-const darkTheme = {
-  textColor: "whitesmoke",
-  backgroundColor: "#111",
-};
-const lightTheme = {
-  textColor: "#111",
-  backgroundColor: "whitesmoke",
-};
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
+const queryClient = new QueryClient();
+
+ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={darkTheme}>
-      <App />
-    </ThemeProvider>
-  </React.StrictMode>
+    <RecoilRoot>
+      <QueryClientProvider client={queryClient}>
+        <App />
+      </QueryClientProvider>
+    </RecoilRoot>
+  </React.StrictMode>,
+  document.getElementById("root")
 );
-//part 2 finished
+
+//React Quey는 데이터를 fetch하는 기능을 가진 패키지
+//npm i react-router-dom@5.3.0은 어블리케이션에 url, 페이지들을 보여주게 해줌
